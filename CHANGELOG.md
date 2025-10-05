@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.1...v0.1.2) (2025-10-05)
+
+### Bug Fixes
+
+* **Template:** Correct template key quoting in ConfigValueTemplate.scriban ([f125d92](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/f125d929441f7dd1cf8a953888b2ac727a6f49f9))
+
 ## [0.1.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.0...v0.1.1) (2025-10-05)
 
 ### Bug Fixes
