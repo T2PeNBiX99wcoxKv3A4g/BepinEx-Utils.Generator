@@ -14,23 +14,9 @@ public class BepInUtilsGenerator : IIncrementalGenerator
 {
     private const string BepInUtilsAttributeFullName = "BepInExUtils.Attributes.BepInUtilsAttribute";
     private const string BepInUtilsAttributeShortName = "BepInUtils";
+    private const string BepInUtilsAttributeClassName = "BepInUtilsAttribute";
     private const string ConfigBindAttributeShortName = "ConfigBind";
-    private const string ConfigFieldTemplateString = "internal static ConfigEntry<{{Type}}>? _{{Key}};";
-
-    private const string ConfigValueTemplateString =
-        "Configs._{{Key}} = Config.Bind({{Section}}, nameof(Configs._{{Key}}), {{DefaultValue}}, {{Description}});";
-
-    private const string ConfigPropertyTemplateString = """
-                                                        public static {{Type}} {{Key}}
-                                                        {
-                                                            get => _{{Key}}?.Value ?? default;
-                                                            set
-                                                            {
-                                                                if (_{{Key}} == null) return;
-                                                                _{{Key}}.Value = value;
-                                                            }
-                                                        }
-                                                        """;
+    private const string ConfigBindAttributeClassName = "ConfigBindAttribute";
 
     private static Template? _cacheTemplate;
     private static Template? _cacheConfigFieldTemplate;
@@ -40,13 +26,13 @@ public class BepInUtilsGenerator : IIncrementalGenerator
     private static Template Template => _cacheTemplate ??= Template.Parse(Resources.BepInUtilsTemplate);
 
     private static Template ConfigFieldTemplate =>
-        _cacheConfigFieldTemplate ??= Template.Parse(ConfigFieldTemplateString);
+        _cacheConfigFieldTemplate ??= Template.Parse(Resources.ConfigFieldTemplate);
 
     private static Template ConfigValueTemplate =>
-        _cacheConfigValueTemplate ??= Template.Parse(ConfigValueTemplateString);
+        _cacheConfigValueTemplate ??= Template.Parse(Resources.ConfigValueTemplate);
 
     private static Template ConfigPropertyTemplate =>
-        _cacheConfigPropertyTemplate ??= Template.Parse(ConfigPropertyTemplateString);
+        _cacheConfigPropertyTemplate ??= Template.Parse(Resources.ConfigPropertyTemplate);
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -76,6 +62,11 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             .Select(u => u.ToString())
             .Distinct());
 
+        var bepInUtilsDatas =
+            syntaxContext.Attributes.FirstOrDefault(attr => attr.AttributeClass?.Name == BepInUtilsAttributeClassName);
+        var configBindDatas = syntaxContext.Attributes.Where(attr =>
+            attr.AttributeClass?.Name.StartsWith(ConfigBindAttributeClassName + "<") ?? false);
+
         var attributeSyntax = syntax.AttributeLists.SelectMany(a => a.Attributes)
             .FirstOrDefault(attr => attr.Name.ToString() == BepInUtilsAttributeShortName);
 
@@ -89,11 +80,22 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             ))
             .ToList();
 
+        var configValues = configBindDatas.Select(attr => attr?.ConstructorArguments ?? []).ToList();
+        var argsConstant = bepInUtilsDatas?.ConstructorArguments ?? [];
         var args = attributeSyntax.ArgumentList.Arguments;
-        if (args.Count != 3) return null;
-        var guid = args[0].ToString().Trim('"');
-        var name = args[1].ToString().Trim('"');
-        var version = args[2].ToString().Trim('"');
+        var guid = argsConstant.Length > 0 && argsConstant[0].Kind == TypedConstantKind.Primitive &&
+                   argsConstant[0].Value is string value
+            ? value
+            : args[0].ToString().Trim('"');
+        var name = argsConstant.Length > 1 && argsConstant[1].Kind == TypedConstantKind.Primitive &&
+                   argsConstant[1].Value is string value2
+            ? value2
+            : args[1].ToString().Trim('"');
+        var version =
+            argsConstant.Length > 2 && argsConstant[2].Kind == TypedConstantKind.Primitive &&
+            argsConstant[2].Value is string value3
+                ? value3
+                : args[2].ToString().Trim('"');
         var classInfo = new ClassInfo(namespaceName, className, usingsText);
         var configInfos = configs.Select(val =>
         {
@@ -101,10 +103,48 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             var typeEndIndex = val.Name.IndexOf('>');
             var type = val.Name.Substring(typeStartIndex + 1, typeEndIndex - typeStartIndex - 1);
             var key = val.Arguments[0].Trim('"');
-            var otherArgs = val.Arguments.Skip(1).ToArray();
+            var section = val.Arguments[1] ?? "\"Options\"";
+            var defaultValue = val.Arguments[2] ?? "null";
+            var description = val.Arguments[3] ?? "null";
+            var minValue = val.Arguments.Length > 4 ? val.Arguments[4] : null;
+            var maxValue = val.Arguments.Length > 5 ? val.Arguments[5] : null;
 
-            return new ConfigInfo(type, key, otherArgs);
+            return new ConfigInfo(type, key, section, defaultValue, description, minValue, maxValue);
         }).ToList();
+
+        // var configValueInfos = configValues.Select(val =>
+        // {
+        //     var key = val.Length > 0 && val[0].Kind == TypedConstantKind.Primitive && val[0].Value is string value4
+        //         ? value4
+        //         : null;
+        //     var section = val.Length > 1 && val[1].Kind == TypedConstantKind.Primitive && val[1].Value is string value5
+        //         ? value5
+        //         : null;
+        //     var configDefinition =
+        //         val.Length > 0 && val[0].Kind == TypedConstantKind.Type &&
+        //         val[0].Value is ConfigDefinition configDefinitionValue
+        //             ? configDefinitionValue
+        //             : null;
+        //     var defaultValue = val.Length > 2 && val[2].Kind == TypedConstantKind.Primitive ? val[2].Value : null;
+        //     var defaultValue2 = val.Length > 1 && val[1].Kind == TypedConstantKind.Primitive ? val[1].Value : null;
+        //     var description =
+        //         val.Length > 3 && val[3].Kind == TypedConstantKind.Primitive && val[3].Value is string value6
+        //             ? value6
+        //             : null;
+        //     var description2 =
+        //         val.Length > 3 && val[3].Kind == TypedConstantKind.Primitive &&
+        //         val[3].Value is ConfigDescription configDescriptionValue
+        //             ? configDescriptionValue
+        //             : null;
+        //     description2 ??=
+        //         val.Length > 2 && val[2].Kind == TypedConstantKind.Primitive &&
+        //         val[2].Value is ConfigDescription configDescriptionValue2
+        //             ? configDescriptionValue2
+        //             : null;
+        //
+        //     return new ConfigValueInfo(key, section, configDefinition, defaultValue, defaultValue2, description,
+        //         description2);
+        // }).ToList();
 
         return new BepInPluginInfo(classInfo, guid, name, version, configInfos);
     }
@@ -112,20 +152,45 @@ public class BepInUtilsGenerator : IIncrementalGenerator
     private static void Execute(SourceProductionContext context, BepInPluginInfo? info)
     {
         if (!info.HasValue) return;
-        var (classInfo, guid, name, version, configs) = info.Value;
+        var (classInfo, guid, name, version, configInfos) = info.Value;
         var (namespaceName, className, usings) = classInfo;
         var uniqueHintName = classInfo.UniqueHintName;
-        var configFields = configs.Select(config =>
+        // var configInfoPairs = configInfos.Zip(configValueInfos, (configInfo, configValue) => (configInfo, configValue))
+        //     .ToList();
+        // var configInfoHandles = new List<ConfigInfoHandle>();
+        //
+        // for (var i = 0; i < configInfos.Count; i++)
+        // {
+        //     var configInfo = configInfos[i];
+        //     var configValue = configValueInfos[i];
+        //     var type = configInfo.Type;
+        //     var key = configValue.Key ?? configValue.ConfigDefinition?.Key ?? configInfo.Key;
+        //     var arg0 = configInfo.OtherArgs.Length > 0 ? configInfo.OtherArgs[0] : null;
+        //     var arg1 = configInfo.OtherArgs.Length > 1 ? configInfo.OtherArgs[1] : null;
+        //     var arg2 = configInfo.OtherArgs.Length > 2 ? configInfo.OtherArgs[2] : null;
+        //     var section = configValue.Section ?? configValue.ConfigDefinition?.Section ?? arg1 ?? arg0;
+        //     var defaultValue = configValue.DefaultValue ?? configValue.DefaultValue2 ?? arg2 ?? arg1;
+        //     object? description = configValue.Description;
+        //     description ??= configValue.ConfigDescription;
+        //     description ??= arg2;
+        //     
+        //     configInfoHandles.Add(new(type, key, section, defaultValue?.ToString() ?? "null", description));
+        // }
+
+        var configFields = configInfos.Select(config =>
             ConfigFieldTemplate.Render(new { config.Type, config.Key }, member => member.Name)).ToList();
-        var configPropertyList = configs.Select(config =>
+        var configPropertyList = configInfos.Select(config =>
             ConfigPropertyTemplate.Render(new { config.Type, config.Key }, member => member.Name)).ToList();
-        var configValues = configs.Select(config => ConfigValueTemplate.Render(new
+        var configValues = configInfos.Select(config => ConfigValueTemplate.Render(new
         {
             config.Type,
             config.Key,
-            Section = config.OtherArgs[0],
-            DefaultValue = config.OtherArgs[1],
-            Description = config.OtherArgs[2]
+            config.Section,
+            config.DefaultValue,
+            config.Description,
+            AcceptableValueRange = config.MinValue != null
+                ? $"new AcceptableValueRange<{config.Type}>({config.MinValue}, {config.MaxValue})"
+                : "null"
         }, member => member.Name)).ToList();
 
         var sourceCode = Template.Render(new

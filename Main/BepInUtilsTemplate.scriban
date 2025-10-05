@@ -13,7 +13,7 @@ using Logger = BepInExUtils.Logger;
 namespace {{Namespace}};
 
 [BepInPlugin(Utils.Guid, Utils.Name, Utils.Version)]
-partial class {{ClassName}} : BaseUnityPlugin, IBepInUtils
+partial class {{ClassName}} : BepInUtilsUnityPlugin
 {
     private static {{ClassName}}? _instance;
     private readonly Harmony _harmony = new(Utils.Guid);

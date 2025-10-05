@@ -1,0 +1,1 @@
+Configs._{{Key}} = Config.Bind(new ConfigDefinition({{Section}}, nameof(Configs._{{Key}})), {{DefaultValue}}, new ConfigDescription({{Description}}, {{AcceptableValueRange}}));

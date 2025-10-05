@@ -7,10 +7,10 @@ public readonly record struct BepInPluginInfo(
     string Guid,
     string Name,
     string Version,
-    List<ConfigInfo> Configs)
+    List<ConfigInfo> ConfigInfos)
 {
     public readonly ClassInfo ClassInfo = ClassInfo;
-    public readonly List<ConfigInfo> Configs = Configs;
+    public readonly List<ConfigInfo> ConfigInfos = ConfigInfos;
     public readonly string Guid = Guid;
     public readonly string Name = Name;
     public readonly string Version = Version;
