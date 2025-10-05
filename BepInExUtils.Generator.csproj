@@ -10,10 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.44">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
         <PackageReference Include="JetBrains.Annotations" Version="2025.2.2"/>
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
             <PrivateAssets>all</PrivateAssets>
@@ -31,24 +27,4 @@
       <Content Include=".github\workflows\pre-release.yml" />
       <Content Include=".github\workflows\release.yml" />
     </ItemGroup>
-
-<!--    <Target Name="ILRepacker" AfterTargets="Build">-->
-<!--        <ItemGroup>-->
-<!--            <InputAssemblies Include="$(OutputPath)\BepInEx.dll" />-->
-<!--        </ItemGroup>-->
-
-<!--        <ItemGroup>-->
-<!--            &lt;!&ndash; Must be a fully qualified name &ndash;&gt;-->
-<!--            <DoNotInternalizeAssemblies Include="ExampleAssemblyToMerge3" />-->
-<!--        </ItemGroup>-->
-
-<!--        <ILRepack-->
-<!--                Parallel="true"-->
-<!--                Internalize="true"-->
-<!--                InternalizeExclude="@(DoNotInternalizeAssemblies)"-->
-<!--                InputAssemblies="@(InputAssemblies)"-->
-<!--                TargetKind="Dll"-->
-<!--                OutputFile="$(OutputPath)\$(AssemblyName).dll"-->
-<!--        />-->
-<!--    </Target>-->
 </Project>
