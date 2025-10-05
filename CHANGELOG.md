@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.0.5...v0.1.0) (2025-10-05)
+
+### Features
+
+* Add templates and extend configuration support ([f680398](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/f6803989765d94a4734e01bb6836b455c102e648))
+
 ### [0.0.5](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.0.4...v0.0.5) (2025-10-05)
 
 ### Bug Fixes
