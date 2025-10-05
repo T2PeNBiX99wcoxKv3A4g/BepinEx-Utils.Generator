@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.0...v0.1.1) (2025-10-05)
+
+### Bug Fixes
+
+* **Changelog:** Normalize changelog headers to use consistent formatting ([63c9b6a](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/63c9b6ab2e8ff6d16f94241a7878e77ed142efb5))
+
 ## [0.1.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.0.5...v0.1.0) (2025-10-05)
 
 ### Features
