@@ -1,4 +1,4 @@
-# BepInEx Utils
+# BepInEx Utils Generator
 
 Generator for BepinEx Utils
 
