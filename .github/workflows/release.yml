@@ -34,6 +34,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pre_release_branches: "fast"
 
+      - name: Pull changes
+        run: git pull
+
       - name: Clone Python script
         run: git clone https://github.com/T2PeNBiX99wcoxKv3A4g/Change-Log-File-Generator.git .change-log-generator
 

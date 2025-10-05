@@ -35,6 +35,9 @@ jobs:
           pre_release_branches: "fast"
           custom_release_rules: "fix:prerelease,feat:prerelease"
 
+      - name: Pull changes
+        run: git pull
+
       - name: Clone Python script
         run: git clone https://github.com/T2PeNBiX99wcoxKv3A4g/Change-Log-File-Generator.git .change-log-generator
 
