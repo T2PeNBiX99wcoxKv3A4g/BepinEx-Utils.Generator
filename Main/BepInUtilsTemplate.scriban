@@ -1,0 +1,46 @@
+#pragma warning disable CS0105 // Disable warning about redundant using directive
+global using BepInExUtils.EX;
+using System.Reflection;
+using HarmonyLib;
+using BepInEx;
+using BepInEx.Configuration;
+using BepInExUtils.Interfaces;
+{{Usings}}
+using Logger = BepInExUtils.Logger;
+#pragma warning restore CS0105
+
+#nullable enable
+namespace {{Namespace}};
+
+[BepInPlugin(Utils.Guid, Utils.Name, Utils.Version)]
+partial class {{ClassName}} : BaseUnityPlugin, IBepInUtils
+{
+    private static {{ClassName}}? _instance;
+    private readonly Harmony _harmony = new(Utils.Guid);
+    
+    private void Awake()
+    {
+        _instance = this;
+        {{ConfigValues}}
+        Utils.Logger.Info($"Plugin {Utils.Name} loaded, version {Utils.Version}");
+        _harmony.PatchAll(Assembly.GetExecutingAssembly());
+        PostAwake();
+    }
+}
+
+public static partial class Utils
+{
+    internal const string Guid = "{{Guid}}";
+    internal const string Name = "{{Name}}";
+    internal const string Version = "{{Version}}";
+
+    private static Logger? _logger;
+    public static Logger Logger => _logger ??= new(Name);
+}
+
+public static class Configs
+{
+    {{ConfigFields}}
+    
+    {{ConfigPropertyList}}
+}

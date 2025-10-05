@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <PackageScribanIncludeSource>true</PackageScribanIncludeSource>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.44">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="JetBrains.Annotations" Version="2025.2.2"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all"/>
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" PrivateAssets="all"/>
+        <PackageReference Include="Scriban" Version="6.4.0" PrivateAssets="all" GeneratePathProperty="true" IncludeAssets="Build"/>
+        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" PrivateAssets="all"/>
+        <EmbeddedResource Include="**\*.scriban"/>
+        <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false"/>
+    </ItemGroup>
+
+<!--    <Target Name="ILRepacker" AfterTargets="Build">-->
+<!--        <ItemGroup>-->
+<!--            <InputAssemblies Include="$(OutputPath)\BepInEx.dll" />-->
+<!--        </ItemGroup>-->
+
+<!--        <ItemGroup>-->
+<!--            &lt;!&ndash; Must be a fully qualified name &ndash;&gt;-->
+<!--            <DoNotInternalizeAssemblies Include="ExampleAssemblyToMerge3" />-->
+<!--        </ItemGroup>-->
+
+<!--        <ILRepack-->
+<!--                Parallel="true"-->
+<!--                Internalize="true"-->
+<!--                InternalizeExclude="@(DoNotInternalizeAssemblies)"-->
+<!--                InputAssemblies="@(InputAssemblies)"-->
+<!--                TargetKind="Dll"-->
+<!--                OutputFile="$(OutputPath)\$(AssemblyName).dll"-->
+<!--        />-->
+<!--    </Target>-->
+</Project>
