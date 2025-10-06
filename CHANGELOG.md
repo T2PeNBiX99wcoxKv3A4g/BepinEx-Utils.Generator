@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.5](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.4..v0.1.5) - 2025-10-06
+
+### 🚜 Refactor
+
+- *(Extensions)* Simplify `GetEmbeddedResource` signature and update LangVersion to `preview` - ([c43f484](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/c43f48493df7e6405f997aff43f1b5cb3019d976))
+
+### Action
+
+- Update `CHANGELOG.md` - ([232a474](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/232a474579f5a9f71653b3f41f4f2b14b0889394))
+
+
 ## [0.1.4](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.3..v0.1.4) - 2025-10-06
 
 ### 🐛 Bug Fixes
