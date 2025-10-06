@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.4](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.3..v0.1.4) - 2025-10-06
+
+### 🐛 Bug Fixes
+
+- *(Workflow)* Update changelog output to use Git Cliff - ([c42365d](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/c42365dfa7265ab44a5805de93a1d2f07bcada08))
+
+### Action
+
+- Update `CHANGELOG.md` - ([0faf2c6](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/0faf2c60e79729e5e886dc7ce41a6f1c263ef37b))
+
+
 ## [0.1.3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.2..v0.1.3) - 2025-10-06
 
 ### 🚜 Refactor
