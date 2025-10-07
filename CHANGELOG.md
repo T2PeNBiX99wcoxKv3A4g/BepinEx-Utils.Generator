@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.0..v0.2.1) - 2025-10-07
+
+### 🚜 Refactor
+
+- Improve analyzer structure and add utility extensions - ([28109f0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/28109f019f54db559db28c22b0e837792871793f))
+
+### Action
+
+- Update `CHANGELOG.md` - ([cdb5bab](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/cdb5babff29314d31de264f47458768db337f1fd))
+
+
 ## [0.2.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.1.5..v0.2.0) - 2025-10-07
 
 ### Action
