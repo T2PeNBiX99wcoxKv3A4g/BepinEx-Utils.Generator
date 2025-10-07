@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using BepInExUtils.Generator.AccessExtensions;
 using BepInExUtils.Generator.BepInUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -16,26 +18,44 @@ public class Analyzer : DiagnosticAnalyzer
 {
     private const string Category = "BepInExUtils";
 
-    private static readonly DiagnosticDescriptor ClassMustBeMarkedPartial = new(
+    internal static readonly DiagnosticDescriptor Test = new(
         "BIEU0001",
+        "Test",
+        "{0}",
+        Category,
+        DiagnosticSeverity.Warning,
+        true
+    );
+
+    private static readonly DiagnosticDescriptor ClassMustBeMarkedPartial = new(
+        "BIEU0002",
         "Class must be marked partial",
-        "Class '{0}' must be marked partial for use with [BepInUtils]",
+        "Class '{0}' must be marked partial",
+        Category,
+        DiagnosticSeverity.Error,
+        true
+    );
+
+    private static readonly DiagnosticDescriptor ClassMustBeMarkedStatic = new(
+        "BIEU0003",
+        "Class must be marked static",
+        "Class '{0}' must be marked static",
         Category,
         DiagnosticSeverity.Error,
         true
     );
 
     private static readonly DiagnosticDescriptor ClassMustNotBeMarkedStatic = new(
-        "BIEU0002",
+        "BIEU0004",
         "Class must not be marked static",
-        "Class '{0}' must not be marked static for use with [BepInUtils]",
+        "Class '{0}' must not be marked static",
         Category,
         DiagnosticSeverity.Error,
         true
     );
 
     internal static readonly DiagnosticDescriptor AccessInstanceUnknownType = new(
-        "BIEU0003",
+        "BIEU0005",
         "Unknown type inside [AccessInstance]",
         "Enter a valid type in class '{0}' with [AccessInstance]",
         Category,
@@ -44,16 +64,16 @@ public class Analyzer : DiagnosticAnalyzer
     );
 
     internal static readonly DiagnosticDescriptor AccessInstanceNotFound = new(
-        "BIEU0004",
+        "BIEU0006",
         "Can't find instance type inside [AccessInstance]",
         "Add [AccessInstance] attribute and enter a valid type in class '{0}'",
         Category,
         DiagnosticSeverity.Error,
         true
     );
-    
+
     internal static readonly DiagnosticDescriptor AccessFieldUnknownType = new(
-        "BIEU0005",
+        "BIEU0007",
         "Unknown type inside [AccessField]",
         "Enter a valid type in class '{0}' with [AccessField]",
         Category,
@@ -61,15 +81,14 @@ public class Analyzer : DiagnosticAnalyzer
         true
     );
 
-    // ReSharper disable once MemberCanBePrivate.Global
-    internal static readonly DiagnosticDescriptor Test = new(
-        "BIEU0100",
-        "Test",
-        "{0}",
-        Category,
-        DiagnosticSeverity.Warning,
-        true
-    );
+    private static readonly List<string> MustPartial =
+        [BepInUtilsGenerator.BepInUtilsAttributeFullName, AccessExtensionsGenerator.AccessExtensionsAttributeFullName];
+
+    private static readonly List<string> MustNonStatic =
+        [BepInUtilsGenerator.BepInUtilsAttributeFullName];
+
+    private static readonly List<string> MustStatic =
+        [AccessExtensionsGenerator.AccessExtensionsAttributeFullName];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
         [ClassMustBeMarkedPartial, ClassMustNotBeMarkedStatic, Test];
@@ -79,29 +98,39 @@ public class Analyzer : DiagnosticAnalyzer
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
 
-        context.RegisterSymbolAction(AnalyzeClassIsPartial, SymbolKind.NamedType);
-        context.RegisterSymbolAction(AnalyzeClassIsStatic, SymbolKind.NamedType);
+        context.RegisterSymbolAction(
+            analysisContext => AnalyzeClass(analysisContext,
+                syntax => syntax.Modifiers.Any(SyntaxKind.PartialKeyword), MustPartial, ClassMustBeMarkedPartial),
+            SymbolKind.NamedType);
+        context.RegisterSymbolAction(
+            analysisContext => AnalyzeClass(analysisContext,
+                syntax => !syntax.Modifiers.Any(SyntaxKind.StaticKeyword), MustNonStatic, ClassMustNotBeMarkedStatic),
+            SymbolKind.NamedType);
+        context.RegisterSymbolAction(
+            analysisContext => AnalyzeClass(analysisContext,
+                syntax => syntax.Modifiers.Any(SyntaxKind.StaticKeyword), MustStatic, ClassMustBeMarkedStatic),
+            SymbolKind.NamedType);
     }
 
-    private static AttributeData? GetAttribute(INamedTypeSymbol typeSymbol) =>
+    private static AttributeData? GetAttribute(INamedTypeSymbol typeSymbol, List<string> list) =>
         typeSymbol.GetAttributes().FirstOrDefault(attr =>
         {
             var attributeClass = attr.AttributeClass;
-            return attributeClass?.Name == BepInUtilsGenerator.BepInUtilsAttributeClassName &&
-                   attributeClass.ToDisplayString() == BepInUtilsGenerator.BepInUtilsAttributeFullName;
+            return list.Contains(attributeClass?.ToDisplayString() ?? string.Empty);
         });
 
-    private static void AnalyzeClassIsPartial(SymbolAnalysisContext context)
+    private static void AnalyzeClass(SymbolAnalysisContext context, ClassCheck classCheckFunc, List<string> list,
+        DiagnosticDescriptor descriptor)
     {
         var typeSymbol = (INamedTypeSymbol)context.Symbol;
-        var isNotClassOrIsPartialClass = typeSymbol.DeclaringSyntaxReferences.All(static syntaxReference =>
+        var classCheck = typeSymbol.DeclaringSyntaxReferences.All(syntaxReference =>
             syntaxReference.GetSyntax() is not ClassDeclarationSyntax classSyntax ||
-            classSyntax.Modifiers.Any(SyntaxKind.PartialKeyword));
+            classCheckFunc.Invoke(classSyntax));
 
-        if (isNotClassOrIsPartialClass)
+        if (classCheck)
             return;
 
-        var attribute = GetAttribute(typeSymbol);
+        var attribute = GetAttribute(typeSymbol, list);
         if (attribute?.ApplicationSyntaxReference?.GetSyntax() is not AttributeSyntax attributeSyntax) return;
         if (attributeSyntax.Parent is not AttributeListSyntax
             {
@@ -109,7 +138,7 @@ public class Analyzer : DiagnosticAnalyzer
             }) return;
 
         var diagnostic = Diagnostic.Create(
-            ClassMustBeMarkedPartial,
+            descriptor,
             classDeclaration.Identifier.GetLocation(),
             classDeclaration.Identifier.ToString()
         );
@@ -117,29 +146,5 @@ public class Analyzer : DiagnosticAnalyzer
         context.ReportDiagnostic(diagnostic);
     }
 
-    private static void AnalyzeClassIsStatic(SymbolAnalysisContext context)
-    {
-        var typeSymbol = (INamedTypeSymbol)context.Symbol;
-        var isNotClassOrIsNotStaticClass = typeSymbol.DeclaringSyntaxReferences.All(static syntaxReference =>
-            syntaxReference.GetSyntax() is not ClassDeclarationSyntax classSyntax ||
-            !classSyntax.Modifiers.Any(SyntaxKind.StaticKeyword));
-
-        if (isNotClassOrIsNotStaticClass)
-            return;
-
-        var attribute = GetAttribute(typeSymbol);
-        if (attribute?.ApplicationSyntaxReference?.GetSyntax() is not AttributeSyntax attributeSyntax) return;
-        if (attributeSyntax.Parent is not AttributeListSyntax
-            {
-                Parent: ClassDeclarationSyntax classDeclaration
-            }) return;
-
-        var diagnostic = Diagnostic.Create(
-            ClassMustNotBeMarkedStatic,
-            classDeclaration.Identifier.GetLocation(),
-            classDeclaration.Identifier.ToString()
-        );
-
-        context.ReportDiagnostic(diagnostic);
-    }
+    private delegate bool ClassCheck(ClassDeclarationSyntax classSyntax);
 }

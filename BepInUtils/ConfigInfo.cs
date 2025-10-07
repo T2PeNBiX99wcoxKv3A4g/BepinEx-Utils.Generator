@@ -1,7 +1,7 @@
 namespace BepInExUtils.Generator.BepInUtils;
 
 public readonly record struct ConfigInfo(
-    string Type,
+    string? Type,
     string Key,
     string Section,
     string DefaultValue,
@@ -15,5 +15,5 @@ public readonly record struct ConfigInfo(
     public readonly string? MaxValue = MaxValue;
     public readonly string? MinValue = MinValue;
     public readonly string Section = Section;
-    public readonly string Type = Type;
+    public readonly string? Type = Type;
 }

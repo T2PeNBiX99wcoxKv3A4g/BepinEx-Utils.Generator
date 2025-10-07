@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,7 +13,7 @@ namespace BepInExUtils.Generator.AccessExtensions;
 [Generator]
 public class AccessExtensionsGenerator : IIncrementalGenerator
 {
-    private const string AccessExtensionsAttributeFullName = "BepInExUtils.Attributes.AccessExtensionsAttribute";
+    internal const string AccessExtensionsAttributeFullName = "BepInExUtils.Attributes.AccessExtensionsAttribute";
     private const string AccessInstanceAttributeShortName = "AccessInstance";
     private const string AccessFieldAttributeShortName = "AccessField";
 
@@ -84,22 +82,7 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
             return;
         }
 
-        var instanceTypeStartIndex = instanceType.IndexOf('<');
-        var instanceTypeEndIndex = instanceType.IndexOf('>');
-
-        if (instanceTypeStartIndex < 0 || instanceTypeEndIndex < 0)
-        {
-            var diagnostic = Diagnostic.Create(
-                Analyzer.AccessInstanceUnknownType,
-                identifier.GetLocation(),
-                identifier.ToString()
-            );
-            context.ReportDiagnostic(diagnostic);
-            return;
-        }
-
-        var type = instanceType.Substring(instanceTypeStartIndex + 1,
-            instanceTypeEndIndex - instanceTypeStartIndex - 1);
+        var type = instanceType.MiddlePath('<', '>');
 
         if (string.IsNullOrEmpty(type))
         {
@@ -115,21 +98,7 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
         var accessProperties = accessFieldInfos.Select(field =>
         {
             var fieldType = field.TypeName;
-            var fieldTypeStartIndex = fieldType.IndexOf('<');
-            var fieldTypeEndIndex = fieldType.IndexOf('>');
-
-            if (fieldTypeStartIndex < 0 || fieldTypeEndIndex < 0)
-            {
-                var diagnostic = Diagnostic.Create(
-                    Analyzer.AccessFieldUnknownType,
-                    identifier.GetLocation(),
-                    identifier.ToString()
-                );
-                context.ReportDiagnostic(diagnostic);
-                return null;
-            }
-
-            var type2 = fieldType.Substring(fieldTypeStartIndex + 1, fieldTypeEndIndex - fieldTypeStartIndex - 1);
+            var type2 = fieldType.MiddlePath('<', '>');
 
             if (!string.IsNullOrEmpty(type2))
                 return AccessPropertyTemplate.Render(new { TypeName = type2, field.FieldName }, member => member.Name);

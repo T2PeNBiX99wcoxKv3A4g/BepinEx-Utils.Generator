@@ -15,7 +15,7 @@ public class BepInUtilsGenerator : IIncrementalGenerator
 {
     internal const string BepInUtilsAttributeFullName = "BepInExUtils.Attributes.BepInUtilsAttribute";
     private const string BepInUtilsAttributeShortName = "BepInUtils";
-    internal const string BepInUtilsAttributeClassName = "BepInUtilsAttribute";
+    private const string BepInUtilsAttributeClassName = "BepInUtilsAttribute";
     private const string ConfigBindAttributeShortName = "ConfigBind";
     private const string ConfigBindAttributeClassName = "ConfigBindAttribute";
 
@@ -91,9 +91,7 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             syntax.Identifier);
         var configInfos = configs.Select(val =>
         {
-            var typeStartIndex = val.Name.IndexOf('<');
-            var typeEndIndex = val.Name.IndexOf('>');
-            var type = val.Name.Substring(typeStartIndex + 1, typeEndIndex - typeStartIndex - 1);
+            var type = val.Name.MiddlePath('<', '>');
             var key = val.Arguments[0].Trim('"');
             var section = val.Arguments[1] ?? "\"Options\"";
             var defaultValue = val.Arguments[2] ?? "null";
