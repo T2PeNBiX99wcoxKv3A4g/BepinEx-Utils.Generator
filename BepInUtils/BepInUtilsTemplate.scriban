@@ -1,5 +1,5 @@
 #pragma warning disable CS0105 // Disable warning about redundant using directive
-global using BepInExUtils.EX;
+global using BepInExUtils.Extensions;
 using System.Reflection;
 using HarmonyLib;
 using BepInEx;

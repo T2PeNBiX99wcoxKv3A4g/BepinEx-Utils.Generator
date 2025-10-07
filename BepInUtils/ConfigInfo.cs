@@ -1,4 +1,4 @@
-namespace BepInExUtils.Generator.Main;
+namespace BepInExUtils.Generator.BepInUtils;
 
 public readonly record struct ConfigInfo(
     string Type,

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace BepInExUtils.Generator.Main;
+namespace BepInExUtils.Generator.BepInUtils;
 
-public readonly record struct BepInPluginInfo(
+public readonly record struct BepInUtilsInfo(
     ClassInfo ClassInfo,
     string Guid,
     string Name,

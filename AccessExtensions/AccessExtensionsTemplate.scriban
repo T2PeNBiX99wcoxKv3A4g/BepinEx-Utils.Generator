@@ -1,0 +1,17 @@
+#pragma warning disable CS0105 // Disable warning about redundant using directive
+using HarmonyLib;
+{{Usings}}
+#pragma warning restore CS0105
+
+#nullable enable
+namespace {{Namespace}};
+
+static partial class {{ClassName}}
+{
+    extension({{TypeName}} instance)
+    {
+        {{Properties}}
+        
+        {{Methods}}
+    }
+}
