@@ -6,7 +6,7 @@ using HarmonyLib;
 #nullable enable
 namespace {{Namespace}};
 
-partial class {{ClassName}}
+static partial class {{ClassName}}
 {
     extension({{TypeName}} instance)
     {
