@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.1..v0.3.2) - 2025-10-09
+
+### 🐛 Bug Fixes
+
+- *(README)* Clarify installation warning wording - ([64efb86](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/64efb8642e00eb45538a0db86a2d74d94db32c0b))
+- *(Template)* Mark `{{ClassName}}` as static in `AccessExtensionsTemplate.scriban` - ([a41a4dc](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/a41a4dcd0a0665e531cacb09c40d0a761bf674db))
+
+### Action
+
+- Update `CHANGELOG.md` - ([04035a3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/04035a370266fe7c77fce4b8b3fb8b2728454d8f))
+
+
 ## [0.3.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.0..v0.3.1) - 2025-10-09
 
 ### 🚜 Refactor
