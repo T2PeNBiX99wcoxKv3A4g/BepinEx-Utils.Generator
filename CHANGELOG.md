@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.0..v0.3.1) - 2025-10-09
+
+### 🚜 Refactor
+
+- Rename `TryGet` methods to `GetValueOrDefault` and `TryGetArg` to `GetArgOrDefault` - ([042d35f](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/042d35f5516038f80a226b7cdcdca409195bc880))
+
+### Action
+
+- Update `CHANGELOG.md` - ([5a0ffad](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/5a0ffad135cceee01d3d53357e3a30407329a0ba))
+
+
 ## [0.3.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.5..v0.3.0) - 2025-10-09
 
 ### ⛰️  Features
