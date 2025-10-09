@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.1..v0.2.2) - 2025-10-09
+
+### 🐛 Bug Fixes
+
+- Fix `TryGetArg` issue - ([0c075e9](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/0c075e9568e249b012e218e455c2f2c3ebc8ed92))
+
+### Action
+
+- Update `CHANGELOG.md` - ([f4e5d8c](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/f4e5d8c9a086829efcd511f92c6159d9b4c1d446))
+
+
 ## [0.2.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.0..v0.2.1) - 2025-10-07
 
 ### 🚜 Refactor
