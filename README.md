@@ -2,7 +2,7 @@
 
 Generator for BepinEx Utils
 
-### **You should not install this to the game**
+### **You should not install this to your game**
 
 A generator used to generate code with BepInEx Utils
 
