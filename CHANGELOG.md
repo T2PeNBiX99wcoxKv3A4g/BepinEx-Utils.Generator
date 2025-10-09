@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.5](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.4..v0.2.5) - 2025-10-09
+
+### 🚜 Refactor
+
+- *(Template)* Remove redundant `public` modifier from Utils class definition - ([86c210c](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/86c210c2c16578b335a0becdb2a6c6aed965fadc))
+
+### Action
+
+- Update `CHANGELOG.md` - ([b1fb884](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/b1fb8846ddc3d55c2c60d901b7962418cb51e0c8))
+
+
 ## [0.2.4](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.3..v0.2.4) - 2025-10-09
 
 ### 🐛 Bug Fixes
