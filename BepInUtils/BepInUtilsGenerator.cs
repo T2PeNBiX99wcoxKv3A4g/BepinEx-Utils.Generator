@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -35,11 +36,28 @@ public class BepInUtilsGenerator : IIncrementalGenerator
     private static Template ConfigPropertyTemplate =>
         _cacheConfigPropertyTemplate ??= Template.Parse(Resources.ConfigPropertyTemplate);
 
+#if DEBUG
+    private static readonly List<string> DebugOutput = [];
+    private const bool Debug = true;
+
+    private static void DebugMsg(string msg) => DebugOutput.Add(msg);
+#else
+    private static void DebugMsg(string msg) {}
+#endif
+
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var classToGenerate =
             context.SyntaxProvider.ForAttributeWithMetadataName(BepInUtilsAttributeFullName, Predicate,
                 Transform).Where(i => i is not null);
+
+#if DEBUG
+        if (Debug)
+            context.RegisterPostInitializationOutput(callback =>
+            {
+                callback.AddSource("test.g.cs", string.Join("\n", DebugOutput));
+            });
+#endif
 
         context.RegisterSourceOutput(classToGenerate, Execute);
     }
@@ -66,13 +84,6 @@ public class BepInUtilsGenerator : IIncrementalGenerator
         var bepInUtilsDatas =
             syntaxContext.Attributes.FirstOrDefault(attr => attr.AttributeClass?.Name == BepInUtilsAttributeClassName);
 
-        var attributeSyntax = syntax.AttributeLists.SelectMany(a => a.Attributes)
-            .FirstOrDefault(attr =>
-                attr.Name.ToString() == BepInUtilsAttributeShortName ||
-                attr.Name.ToString() == BepInUtilsAttributeClassName);
-
-        if (attributeSyntax?.ArgumentList == null) return null;
-
         var configs = syntax.AttributeLists.SelectMany(a => a.Attributes)
             .Where(attr => attr.Name.ToString().StartsWith(ConfigBindAttributeShortName + '<') ||
                            attr.Name.ToString() == ConfigBindAttributeClassName)
@@ -83,10 +94,9 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             .ToList();
 
         var argsConstant = bepInUtilsDatas?.ConstructorArguments ?? [];
-        var args = attributeSyntax.ArgumentList.Arguments;
-        var guid = argsConstant.TryGetArg<string>(0) ?? args[0].ToString().Trim('"');
-        var name = argsConstant.TryGetArg<string>(1) ?? args[1].ToString().Trim('"');
-        var version = argsConstant.TryGetArg<string>(2) ?? args[2].ToString().Trim('"');
+        var guid = argsConstant.TryGetArg<string>(0);
+        var name = argsConstant.TryGetArg<string>(1);
+        var version = argsConstant.TryGetArg<string>(2);
         var classInfo = new ClassInfo(namespaceName, className, usingsText, nameof(Generator),
             syntax.Identifier);
         var configInfos = configs.Select(val =>
@@ -109,7 +119,7 @@ public class BepInUtilsGenerator : IIncrementalGenerator
     {
         if (!info.HasValue) return;
         var (classInfo, guid, name, version, configInfos) = info.Value;
-        var (namespaceName, className, usings, generatorName, _) = classInfo;
+        var (namespaceName, className, usings, generatorName, identifier) = classInfo;
         var uniqueHintName = $"{namespaceName}.{className}_{generatorName}.generated.cs";
         var configFields = configInfos.Select(config =>
             ConfigFieldTemplate.Render(new { config.Type, config.Key }, member => member.Name)).ToList();
@@ -126,6 +136,16 @@ public class BepInUtilsGenerator : IIncrementalGenerator
                 ? $"new AcceptableValueRange<{config.Type}>({config.MinValue}, {config.MaxValue})"
                 : "null"
         }, member => member.Name)).ToList();
+
+        if (guid is null || name is null || version is null)
+        {
+            var diagnostic = Diagnostic.Create(
+                Analyzer.NullReferenceInBepInUtils,
+                identifier.GetLocation(),
+                identifier.ToString()
+            );
+            context.ReportDiagnostic(diagnostic);
+        }
 
         var sourceCode = Template.Render(new
         {

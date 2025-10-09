@@ -81,6 +81,15 @@ public class Analyzer : DiagnosticAnalyzer
         true
     );
 
+    internal static readonly DiagnosticDescriptor NullReferenceInBepInUtils = new(
+        "BIEU0008",
+        "Null reference in [BepInUtils]",
+        "Enter a valid values in class '{0}' with [BepInUtils]",
+        Category,
+        DiagnosticSeverity.Error,
+        true
+    );
+
     private static readonly List<string> MustPartial =
         [BepInUtilsGenerator.BepInUtilsAttributeFullName, AccessExtensionsGenerator.AccessExtensionsAttributeFullName];
 
