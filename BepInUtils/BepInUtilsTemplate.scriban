@@ -28,7 +28,7 @@ partial class {{ClassName}} : BepInUtilsUnityPlugin
     }
 }
 
-public static partial class Utils
+static partial class Utils
 {
     internal const string Guid = "{{Guid}}";
     internal const string Name = "{{Name}}";
