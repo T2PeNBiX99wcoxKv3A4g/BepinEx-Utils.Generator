@@ -22,7 +22,7 @@ partial class {{ClassName}} : BepInUtilsUnityPlugin
     {
         _instance = this;
         {{ConfigValues}}
-        Utils.Logger.Info($"Plugin {Utils.Name} loaded, version {Utils.Version}");
+        Utils.Logger.Info($"Plugin {Utils.Name} is loaded, version {Utils.Version}");
         _harmony.PatchAll(Assembly.GetExecutingAssembly());
         PostAwake();
     }
