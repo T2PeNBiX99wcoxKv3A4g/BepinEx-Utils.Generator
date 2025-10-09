@@ -1,0 +1,4 @@
+public void {{Name}}({{ArgumentsWithTypes}})
+{
+    instance.MethodAccess(nameof({{Name}}){{Arguments}});
+}

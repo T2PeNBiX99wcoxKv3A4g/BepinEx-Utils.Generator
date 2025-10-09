@@ -72,10 +72,10 @@ public class Analyzer : DiagnosticAnalyzer
         true
     );
 
-    internal static readonly DiagnosticDescriptor AccessFieldUnknownType = new(
+    internal static readonly DiagnosticDescriptor AccessInfoUnknownType = new(
         "BIEU0007",
-        "Unknown type inside [AccessField]",
-        "Enter a valid type in class '{0}' with [AccessField]",
+        "Unknown type",
+        "Enter a valid type in class '{0}' with [{1}]",
         Category,
         DiagnosticSeverity.Error,
         true
@@ -85,6 +85,15 @@ public class Analyzer : DiagnosticAnalyzer
         "BIEU0008",
         "Null reference in [BepInUtils]",
         "Enter a valid values in class '{0}' with [BepInUtils]",
+        Category,
+        DiagnosticSeverity.Error,
+        true
+    );
+
+    internal static readonly DiagnosticDescriptor EmptyName = new(
+        "BIEU0009",
+        "Name is empty or null",
+        "Enter a valid values in class '{0}' with [{1}]",
         Category,
         DiagnosticSeverity.Error,
         true

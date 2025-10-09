@@ -6,11 +6,13 @@ using HarmonyLib;
 #nullable enable
 namespace {{Namespace}};
 
-static partial class {{ClassName}}
+partial class {{ClassName}}
 {
     extension({{TypeName}} instance)
     {
-        {{Properties}}
+        {{Field}}
+        
+        {{Property}}
         
         {{Methods}}
     }

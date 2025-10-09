@@ -1,0 +1,4 @@
+public {{TypeName}} {{Name}}({{ArgumentsWithTypes}})
+{
+    return instance.MethodAccess<{{TypeName}}>(nameof({{Name}}){{Arguments}});
+}

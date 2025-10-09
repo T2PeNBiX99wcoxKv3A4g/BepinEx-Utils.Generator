@@ -37,7 +37,7 @@ public class BepInUtilsGenerator : IIncrementalGenerator
 
 #if DEBUG
     private static readonly List<string> DebugOutput = [];
-    private const bool Debug = true;
+    private const bool Debug = false;
 
     private static void DebugMsg(string msg) => DebugOutput.Add(msg);
 #else
@@ -101,12 +101,12 @@ public class BepInUtilsGenerator : IIncrementalGenerator
         var configInfos = configs.Select(val =>
         {
             var type = val.Name.MiddlePath('<', '>');
-            var key = val.Arguments[0].Trim('"');
-            var section = val.Arguments[1] ?? "\"Options\"";
-            var defaultValue = val.Arguments[2] ?? "null";
-            var description = val.Arguments[3] ?? "null";
-            var minValue = val.Arguments.TryGet(4);
-            var maxValue = val.Arguments.TryGet(5);
+            var key = val.Arguments.TryGetValue(0)?.Trim('"');
+            var section = val.Arguments.TryGetValue(1) ?? "\"Options\"";
+            var defaultValue = val.Arguments.TryGetValue(2) ?? "null";
+            var description = val.Arguments.TryGetValue(3) ?? "null";
+            var minValue = val.Arguments.TryGetValue(4);
+            var maxValue = val.Arguments.TryGetValue(5);
 
             return new ConfigInfo(type, key, section, defaultValue, description, minValue, maxValue);
         }).ToList();
@@ -120,8 +120,23 @@ public class BepInUtilsGenerator : IIncrementalGenerator
         var (classInfo, guid, name, version, configInfos) = info.Value;
         var (namespaceName, className, usings, generatorName, identifier) = classInfo;
         var uniqueHintName = $"{namespaceName}.{className}_{generatorName}.generated.cs";
+        // ReSharper disable once InvertIf
         var configFields = configInfos.Select(config =>
-            ConfigFieldTemplate.Render(new { config.Type, config.Key }, member => member.Name)).ToList();
+        {
+            if (string.IsNullOrEmpty(config.Key))
+            {
+                var diagnostic = Diagnostic.Create(
+                    Analyzer.EmptyName,
+                    identifier.GetLocation(),
+                    identifier.ToString(),
+                    ConfigBindAttributeShortName
+                );
+                context.ReportDiagnostic(diagnostic);
+                return null;
+            }
+
+            return ConfigFieldTemplate.Render(new { config.Type, config.Key }, member => member.Name);
+        }).ToList();
         var configPropertyList = configInfos.Select(config =>
             ConfigPropertyTemplate.Render(new { config.Type, config.Key }, member => member.Name)).ToList();
         var configValues = configInfos.Select(config => ConfigValueTemplate.Render(new

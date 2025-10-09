@@ -18,7 +18,7 @@ public static class StringExtensions
         public string? FirstPath(string value)
         {
             var findEnd = str.LastIndexOf(value, StringComparison.Ordinal);
-            return findEnd < 0 ? null : str.Substring(0, findEnd);
+            return findEnd < 0 ? null : str.Substring(0, findEnd - value.Length + 1);
         }
 
         [UsedImplicitly]
@@ -32,7 +32,7 @@ public static class StringExtensions
         public string? LastPath(string value)
         {
             var findStart = str.IndexOf(value, StringComparison.Ordinal);
-            return findStart < 0 ? null : str.Substring(findStart + 1);
+            return findStart < 0 ? null : str.Substring(findStart + value.Length);
         }
 
         [UsedImplicitly]
@@ -46,5 +46,21 @@ public static class StringExtensions
 
         [UsedImplicitly]
         public string? MiddlePath(string first, char last) => str.FirstPath(last)?.LastPath(first);
+
+        [UsedImplicitly]
+        public bool TryGetValue(int index, out char? value)
+        {
+            if (index < 0 || index >= str.Length)
+            {
+                value = null;
+                return false;
+            }
+
+            value = str[index];
+            return true;
+        }
+
+        [UsedImplicitly]
+        public char? TryGetValue(int index) => index < 0 || index >= str.Length ? null : str[index];
     }
 }
