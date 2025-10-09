@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.5..v0.3.0) - 2025-10-09
+
+### ⛰️  Features
+
+- Extend `AccessExtensionsGenerator` with new templates and enhanced attribute handling - ([cb9a622](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/cb9a6225ff38b9214b55e2039eaf40c37aaabc73))
+
+### 🐛 Bug Fixes
+
+- Get actual key value from `[ConfigBind]` - ([07f2814](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/07f281499ac2f7509122c7f006d12377838e4726))
+
+### Action
+
+- Update `CHANGELOG.md` - ([d5acef2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/d5acef262de3e7e82a6221318a876f252f7470ae))
+
+
 ## [0.2.5](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.4..v0.2.5) - 2025-10-09
 
 ### 🚜 Refactor
