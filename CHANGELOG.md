@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.4](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.3..v0.2.4) - 2025-10-09
+
+### 🐛 Bug Fixes
+
+- *(Template)* Correct log message grammar in `BepInUtilsTemplate.scriban` - ([efe176e](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/efe176e4e9b1d48f8123c4340517aece326c51e5))
+
+### Action
+
+- Update `CHANGELOG.md` - ([d59ce1e](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/d59ce1eb67f29e9d466194f898b6f4ce06480946))
+
+
 ## [0.2.3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.2..v0.2.3) - 2025-10-09
 
 ### 🚜 Refactor
