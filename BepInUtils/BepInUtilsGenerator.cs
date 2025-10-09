@@ -15,7 +15,6 @@ namespace BepInExUtils.Generator.BepInUtils;
 public class BepInUtilsGenerator : IIncrementalGenerator
 {
     internal const string BepInUtilsAttributeFullName = "BepInExUtils.Attributes.BepInUtilsAttribute";
-    private const string BepInUtilsAttributeShortName = "BepInUtils";
     private const string BepInUtilsAttributeClassName = "BepInUtilsAttribute";
     private const string ConfigBindAttributeShortName = "ConfigBind";
     private const string ConfigBindAttributeClassName = "ConfigBindAttribute";
