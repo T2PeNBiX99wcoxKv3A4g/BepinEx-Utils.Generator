@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.2..v0.2.3) - 2025-10-09
+
+### 🚜 Refactor
+
+- Remove unused constant in `BepInUtilsGenerator` - ([4b16903](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/4b16903522f626d64bf62aee6006adfd7075dc7a))
+
+### Action
+
+- Update `CHANGELOG.md` - ([8258695](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/82586952cbe9ec4f16a29c6965a71b95caa67066))
+
+
 ## [0.2.2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.2.1..v0.2.2) - 2025-10-09
 
 ### 🐛 Bug Fixes
