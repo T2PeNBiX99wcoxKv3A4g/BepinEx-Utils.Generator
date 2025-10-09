@@ -92,16 +92,20 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             ))
             .ToList();
 
+        var configArgs = syntaxContext.TargetSymbol.GetAttributes()
+            .Where(attr => attr.AttributeClass?.Name == ConfigBindAttributeClassName)
+            .Select(data => data.ConstructorArguments).ToList();
+        var configKeys = configArgs.Select(args => args.TryGetArg<string>(0)).ToList();
+
         var argsConstant = bepInUtilsDatas?.ConstructorArguments ?? [];
         var guid = argsConstant.TryGetArg<string>(0);
         var name = argsConstant.TryGetArg<string>(1);
         var version = argsConstant.TryGetArg<string>(2);
         var classInfo = new ClassInfo(namespaceName, className, usingsText, nameof(Generator),
             syntax.Identifier);
-        var configInfos = configs.Select(val =>
+        var configInfos = configs.Zip(configKeys, (val, key) =>
         {
             var type = val.Name.MiddlePath('<', '>');
-            var key = val.Arguments.TryGetValue(0)?.Trim('"');
             var section = val.Arguments.TryGetValue(1) ?? "\"Options\"";
             var defaultValue = val.Arguments.TryGetValue(2) ?? "null";
             var description = val.Arguments.TryGetValue(3) ?? "null";
