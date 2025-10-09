@@ -95,22 +95,22 @@ public class BepInUtilsGenerator : IIncrementalGenerator
         var configArgs = syntaxContext.TargetSymbol.GetAttributes()
             .Where(attr => attr.AttributeClass?.Name == ConfigBindAttributeClassName)
             .Select(data => data.ConstructorArguments).ToList();
-        var configKeys = configArgs.Select(args => args.TryGetArg<string>(0)).ToList();
+        var configKeys = configArgs.Select(args => args.GetArgOrDefault<string>(0)).ToList();
 
         var argsConstant = bepInUtilsDatas?.ConstructorArguments ?? [];
-        var guid = argsConstant.TryGetArg<string>(0);
-        var name = argsConstant.TryGetArg<string>(1);
-        var version = argsConstant.TryGetArg<string>(2);
+        var guid = argsConstant.GetArgOrDefault<string>(0);
+        var name = argsConstant.GetArgOrDefault<string>(1);
+        var version = argsConstant.GetArgOrDefault<string>(2);
         var classInfo = new ClassInfo(namespaceName, className, usingsText, nameof(Generator),
             syntax.Identifier);
         var configInfos = configs.Zip(configKeys, (val, key) =>
         {
             var type = val.Name.MiddlePath('<', '>');
-            var section = val.Arguments.TryGetValue(1) ?? "\"Options\"";
-            var defaultValue = val.Arguments.TryGetValue(2) ?? "null";
-            var description = val.Arguments.TryGetValue(3) ?? "null";
-            var minValue = val.Arguments.TryGetValue(4);
-            var maxValue = val.Arguments.TryGetValue(5);
+            var section = val.Arguments.GetValueOrDefault(1) ?? "\"Options\"";
+            var defaultValue = val.Arguments.GetValueOrDefault(2) ?? "null";
+            var description = val.Arguments.GetValueOrDefault(3) ?? "null";
+            var minValue = val.Arguments.GetValueOrDefault(4);
+            var maxValue = val.Arguments.GetValueOrDefault(5);
 
             return new ConfigInfo(type, key, section, defaultValue, description, minValue, maxValue);
         }).ToList();

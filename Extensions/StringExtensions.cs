@@ -61,6 +61,6 @@ public static class StringExtensions
         }
 
         [UsedImplicitly]
-        public char? TryGetValue(int index) => index < 0 || index >= str.Length ? null : str[index];
+        public char? GetValueOrDefault(int index) => str.TryGetValue(index, out var value) ? value : null;
     }
 }

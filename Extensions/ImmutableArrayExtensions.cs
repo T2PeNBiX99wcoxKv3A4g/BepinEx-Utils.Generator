@@ -9,7 +9,7 @@ public static class ImmutableArrayExtensions
     extension<T>(ImmutableArray<T> array)
     {
         [UsedImplicitly]
-        public bool TryGet(int index, out T? value)
+        public bool TryGetValue(int index, out T? value)
         {
             if (index < 0 || index >= array.Length)
             {
@@ -22,7 +22,7 @@ public static class ImmutableArrayExtensions
         }
 
         [UsedImplicitly]
-        public T? TryGet(int index) => index >= array.Length ? default : array[index];
+        public T? GetValueOrDefault(int index) => index >= array.Length ? default : array[index];
     }
 
     extension(ImmutableArray<TypedConstant> array)
@@ -30,7 +30,7 @@ public static class ImmutableArrayExtensions
         [UsedImplicitly]
         public bool TryGetArg<T>(int index, out T? value)
         {
-            if (!array.TryGet(index, out var typedConstant) || typedConstant.Value is not T getValue)
+            if (!array.TryGetValue(index, out var typedConstant) || typedConstant.Value is not T getValue)
             {
                 value = default;
                 return false;
@@ -41,9 +41,10 @@ public static class ImmutableArrayExtensions
         }
 
         [UsedImplicitly]
-        public T? TryGetArg<T>(int index)
+        public T? GetArgOrDefault<T>(int index)
         {
-            if (!array.TryGet(index, out var typedConstant) || typedConstant.Value is not T getValue) return default;
+            if (!array.TryGetValue(index, out var typedConstant) || typedConstant.Value is not T getValue)
+                return default;
             return getValue;
         }
     }

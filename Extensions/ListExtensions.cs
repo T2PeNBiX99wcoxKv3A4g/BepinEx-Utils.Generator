@@ -21,7 +21,7 @@ public static class ListExtensions
         }
 
         [UsedImplicitly]
-        public T? TryGetValue(int index) => index < 0 || index >= list.Count ? default : list[index];
+        public T? GetValueOrDefault(int index) => list.TryGetValue(index, out var value) ? value : default;
 
         [UsedImplicitly]
         public bool TrySetValue(int index, T value)
@@ -48,7 +48,7 @@ public static class ListExtensions
         }
 
         [UsedImplicitly]
-        public T? TryGetValue(int index) => index < 0 || index >= array.Length ? default : array[index];
+        public T? GetValueOrDefault(int index) => array.TryGetValue(index, out var value) ? value : default;
 
         [UsedImplicitly]
         public bool TrySetValue(int index, T value)

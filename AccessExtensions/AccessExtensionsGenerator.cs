@@ -81,7 +81,7 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
         var accessFieldArgs = syntaxContext.TargetSymbol.GetAttributes()
             .Where(attr => attr.AttributeClass?.Name is AccessFieldAttributeClassName)
             .Select(data => data.ConstructorArguments).ToList();
-        var accessFieldNames = accessFieldArgs.Select(args => args.TryGetArg<string>(0) ?? "").ToList();
+        var accessFieldNames = accessFieldArgs.Select(args => args.GetArgOrDefault<string>(0) ?? "").ToList();
 
         var accessFieldInfos = accessFieldTypeNames
             .Zip(accessFieldNames, (typeName, name) => new AccessFieldInfo(typeName, name)).ToList();
@@ -95,7 +95,7 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
         var accessPropertyArgs = syntaxContext.TargetSymbol.GetAttributes()
             .Where(attr => attr.AttributeClass?.Name is AccessPropertyAttributeClassName)
             .Select(data => data.ConstructorArguments).ToList();
-        var accessPropertyNames = accessPropertyArgs.Select(args => args.TryGetArg<string>(0) ?? "").ToList();
+        var accessPropertyNames = accessPropertyArgs.Select(args => args.GetArgOrDefault<string>(0) ?? "").ToList();
 
         var accessPropertyInfos = accessPropertyTypeNames
             .Zip(accessPropertyNames, (typeName, name) => new AccessPropertyInfo(typeName, name)).ToList();
@@ -118,7 +118,7 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
         var accessMethodArgs = syntaxContext.TargetSymbol.GetAttributes()
             .Where(attr => attr.AttributeClass?.Name is AccessMethodAttributeClassName)
             .Select(data => data.ConstructorArguments).ToList();
-        var accessMethodNames = accessMethodArgs.Select(args => args.TryGetArg<string>(0) ?? "").ToList();
+        var accessMethodNames = accessMethodArgs.Select(args => args.GetArgOrDefault<string>(0) ?? "").ToList();
 
         var accessMethodInfos = accessMethodTypeNames.Zip(accessMethodNames,
             (tuple, name) => new AccessMethodInfo(tuple.TypeName, name, tuple.OtherArgs)).ToList();
@@ -275,7 +275,7 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
                 var argumentNames = argTypes.Select(arg =>
                     {
                         argCountList[arg] = argCountList.TryGetValue(arg, out var count) ? count + 1 : 1;
-                        return char.ToLower(arg.TryGetValue(0) ?? 'a') + arg.Substring(1) + argCountList[arg];
+                        return char.ToLower(arg.GetValueOrDefault(0) ?? 'a') + arg.Substring(1) + argCountList[arg];
                     })
                     .ToList();
                 var argumentsWithTypesList = argTypes.Zip(argumentNames, (arg, name) => $"{arg} {name}").ToList();
