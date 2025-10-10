@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.4.0..v0.5.0) - 2025-10-10
+
+### ⛰️  Features
+
+- *(Template)* Track old and new values in configuration value change events - ([b4d082a](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/b4d082a772cf66a96f68f35555850ed7cb1fd1d1))
+
+### Action
+
+- Update `CHANGELOG.md` - ([12b960d](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/12b960dd37b5a576ae588c476f91c6c1f738dfe8))
+
+
 ## [0.4.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.4..v0.4.0) - 2025-10-10
 
 ### ⛰️  Features
