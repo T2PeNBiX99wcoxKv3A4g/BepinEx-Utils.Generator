@@ -1,7 +1,7 @@
-#pragma warning disable CS0105 // Disable warning about redundant using directive
+#pragma warning disable CS0105
+#pragma warning disable CS8603
 using HarmonyLib;
 {{Usings}}
-#pragma warning restore CS0105
 
 #nullable enable
 namespace {{Namespace}};
