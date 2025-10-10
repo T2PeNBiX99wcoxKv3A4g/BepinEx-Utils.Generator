@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.4..v0.4.0) - 2025-10-10
+
+### ⛰️  Features
+
+- *(Template)* Add support for value change events in configuration templates - ([4e9941a](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/4e9941a1c07530089f2e06a592332a6f91c6ac6b))
+
+### Action
+
+- Update `CHANGELOG.md` - ([0ba4f48](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/0ba4f48b3a859f08618d9ea3f7a602c8ad5a0fcd))
+
+
 ## [0.3.4](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.3..v0.3.4) - 2025-10-10
 
 ### 🐛 Bug Fixes
