@@ -1,3 +1,7 @@
+public delegate void On{{Key}}ValueChangedEvent({{Type}} newValue);
+
+public static event On{{Key}}ValueChangedEvent? On{{Key}}ValueChanged;
+
 public static {{Type}} {{Key}}
 {
     get => _{{Key}}?.Value ?? default;

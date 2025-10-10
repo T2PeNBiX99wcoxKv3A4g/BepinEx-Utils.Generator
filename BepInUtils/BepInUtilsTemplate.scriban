@@ -22,6 +22,7 @@ partial class {{ClassName}} : BepInUtilsUnityPlugin
     {
         _instance = this;
         {{ConfigValues}}
+        Configs.Init();
         Utils.Logger.Info($"Plugin {Utils.Name} is loaded, version {Utils.Version}");
         _harmony.PatchAll(Assembly.GetExecutingAssembly());
         PostAwake();
@@ -43,4 +44,9 @@ public static class Configs
     {{ConfigFields}}
     
     {{ConfigPropertyList}}
+    
+    internal static void Init()
+    {
+        {{ConfigEvents}}
+    }
 }

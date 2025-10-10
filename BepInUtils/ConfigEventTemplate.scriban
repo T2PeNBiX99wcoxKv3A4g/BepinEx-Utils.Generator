@@ -1,0 +1,1 @@
+_{{Key}}?.SettingChanged += (sender, args) => On{{Key}}ValueChanged?.Invoke(_{{Key}}.Value);

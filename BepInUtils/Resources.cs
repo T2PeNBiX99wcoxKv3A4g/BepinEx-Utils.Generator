@@ -8,6 +8,7 @@ internal static class Resources
     private const string BepInUtilsTemplatePath = "BepInExUtils.Generator.BepInUtils.BepInUtilsTemplate.scriban";
     private const string ConfigFieldTemplatePath = "BepInExUtils.Generator.BepInUtils.ConfigFieldTemplate.scriban";
     private const string ConfigValueTemplatePath = "BepInExUtils.Generator.BepInUtils.ConfigValueTemplate.scriban";
+    private const string ConfigEventTemplatePath = "BepInExUtils.Generator.BepInUtils.ConfigEventTemplate.scriban";
 
     private const string ConfigPropertyTemplatePath =
         "BepInExUtils.Generator.BepInUtils.ConfigPropertyTemplate.scriban";
@@ -23,4 +24,7 @@ internal static class Resources
 
     public static readonly string ConfigPropertyTemplate =
         Assembly.GetExecutingAssembly().GetEmbeddedResource(ConfigPropertyTemplatePath);
+
+    public static readonly string ConfigEventTemplate =
+        Assembly.GetExecutingAssembly().GetEmbeddedResource(ConfigEventTemplatePath);
 }

@@ -23,6 +23,7 @@ public class BepInUtilsGenerator : IIncrementalGenerator
     private static Template? _cacheConfigFieldTemplate;
     private static Template? _cacheConfigValueTemplate;
     private static Template? _cacheConfigPropertyTemplate;
+    private static Template? _cacheConfigEventTemplate;
 
     private static Template Template => _cacheTemplate ??= Template.Parse(Resources.BepInUtilsTemplate);
 
@@ -34,6 +35,9 @@ public class BepInUtilsGenerator : IIncrementalGenerator
 
     private static Template ConfigPropertyTemplate =>
         _cacheConfigPropertyTemplate ??= Template.Parse(Resources.ConfigPropertyTemplate);
+
+    private static Template ConfigEventTemplate =>
+        _cacheConfigEventTemplate ??= Template.Parse(Resources.ConfigEventTemplate);
 
 #if DEBUG
     private static readonly List<string> DebugOutput = [];
@@ -154,6 +158,8 @@ public class BepInUtilsGenerator : IIncrementalGenerator
                 ? $"new AcceptableValueRange<{config.Type}>({config.MinValue}, {config.MaxValue})"
                 : "null"
         }, member => member.Name)).ToList();
+        var configEvents = configInfos
+            .Select(config => ConfigEventTemplate.Render(new { config.Key }, member => member.Name)).ToList();
 
         if (guid is null || name is null || version is null)
         {
@@ -175,7 +181,8 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             Version = version,
             ConfigFields = string.Join("\n", configFields),
             ConfigPropertyList = string.Join("\n\n", configPropertyList),
-            ConfigValues = string.Join("\n", configValues)
+            ConfigValues = string.Join("\n", configValues),
+            ConfigEvents = string.Join("\n", configEvents)
         }, member => member.Name);
 
         if (sourceCode == null) return;
