@@ -1,5 +1,5 @@
 public {{TypeName}} {{Name}}
 {
-    get => Traverse.Create(instance).Field<{{TypeName}}>("{{Name}}").Value;
-    set => Traverse.Create(instance).Field<{{TypeName}}>("{{Name}}").Value = value;
+    get => instance.GetFieldValue<{{TypeName}}>("{{Name}}");
+    set => instance.SetFieldValue<{{TypeName}}>("{{Name}}", value);
 }

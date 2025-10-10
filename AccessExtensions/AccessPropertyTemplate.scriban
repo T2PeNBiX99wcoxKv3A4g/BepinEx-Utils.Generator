@@ -1,5 +1,5 @@
 public {{TypeName}} {{Name}}
 {
-    get => Traverse.Create(instance).Property<{{TypeName}}>("{{Name}}").Value;
-    set => Traverse.Create(instance).Property<{{TypeName}}>("{{Name}}").Value = value;
+    get => instance.GetPropertyValue<{{TypeName}}>("{{Name}}");
+    set => instance.SetPropertyValue<{{TypeName}}>("{{Name}}", value);
 }

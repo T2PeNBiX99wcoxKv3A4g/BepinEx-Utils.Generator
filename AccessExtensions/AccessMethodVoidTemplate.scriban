@@ -1,4 +1,4 @@
 public void {{Name}}({{ArgumentsWithTypes}})
 {
-    instance.MethodAccess(nameof({{Name}}){{Arguments}});
+    instance.MethodInvoke(nameof({{Name}}){{Arguments}});
 }
