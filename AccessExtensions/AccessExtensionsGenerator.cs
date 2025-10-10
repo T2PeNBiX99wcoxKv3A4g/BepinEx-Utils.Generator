@@ -275,7 +275,8 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
                 var argumentNames = argTypes.Select(arg =>
                     {
                         argCountList[arg] = argCountList.TryGetValue(arg, out var count) ? count + 1 : 1;
-                        return char.ToLower(arg.GetValueOrDefault(0) ?? 'a') + arg.Substring(1) + argCountList[arg];
+                        return (char.ToLower(arg.GetValueOrDefault(0) ?? 'a') + arg.Substring(1) + argCountList[arg])
+                            .Replace(".", "").Replace("<", "").Replace(">", "");
                     })
                     .ToList();
                 var argumentsWithTypesList = argTypes.Zip(argumentNames, (arg, name) => $"{arg} {name}").ToList();
