@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.2..v0.3.3) - 2025-10-10
+
+### 🐛 Bug Fixes
+
+- *(Template)* Suppress nullable reference warning (`CS8603`) in `AccessExtensionsTemplate.scriban` - ([52de285](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/52de285ac4cdafbb8863c6cc986083524d77ba81))
+
+### 🚜 Refactor
+
+- *(Template)* Replace `Traverse` and `MethodAccess` with direct access methods in `AccessExtensions` templates - ([7a89982](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/7a899828641f8655e2e3f32d8c534e0dfefbe5f2))
+
+### Action
+
+- Update `CHANGELOG.md` - ([2d7bc38](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/2d7bc3822b5e863bc74a3f31f6bafe66519292e8))
+
+
 ## [0.3.2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.3.1..v0.3.2) - 2025-10-09
 
 ### 🐛 Bug Fixes
