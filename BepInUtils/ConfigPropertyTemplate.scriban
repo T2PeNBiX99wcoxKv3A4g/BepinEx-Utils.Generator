@@ -1,6 +1,8 @@
-public delegate void On{{Key}}ValueChangedEvent({{Type}} newValue);
+public delegate void On{{Key}}ValueChangedEvent({{Type}} oldValue, {{Type}} newValue);
 
 public static event On{{Key}}ValueChangedEvent? On{{Key}}ValueChanged;
+
+private static {{Type}}? _old{{Key}};
 
 public static {{Type}} {{Key}}
 {

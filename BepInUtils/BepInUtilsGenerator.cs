@@ -182,7 +182,7 @@ public class BepInUtilsGenerator : IIncrementalGenerator
             ConfigFields = string.Join("\n", configFields),
             ConfigPropertyList = string.Join("\n\n", configPropertyList),
             ConfigValues = string.Join("\n", configValues),
-            ConfigEvents = string.Join("\n", configEvents)
+            ConfigEvents = string.Join("\n\n", configEvents)
         }, member => member.Name);
 
         if (sourceCode == null) return;

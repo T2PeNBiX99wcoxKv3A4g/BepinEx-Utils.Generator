@@ -1,1 +1,6 @@
-_{{Key}}?.SettingChanged += (sender, args) => On{{Key}}ValueChanged?.Invoke(_{{Key}}.Value);
+_old{{Key}} = _{{Key}}?.Value;
+_{{Key}}?.SettingChanged += (sender, args) =>
+{
+    On{{Key}}ValueChanged?.Invoke(_old{{Key}} ?? default, _{{Key}}.Value);
+    _old{{Key}} = _{{Key}}.Value;
+};
