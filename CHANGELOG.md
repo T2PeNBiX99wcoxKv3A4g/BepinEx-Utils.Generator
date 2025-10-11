@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.0..v0.5.1) - 2025-10-11
+
+### 🐛 Bug Fixes
+
+- *(Generator)* Sanitize argument names by replacing invalid characters (`.`, `<`, `>`, `[`, `]`) in `AccessExtensionsGenerator` - ([87c514a](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/87c514a6eca6893eee632863d1bb9bc98693448e))
+
+### Action
+
+- Update `CHANGELOG.md` - ([0f941b1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/0f941b12f1c1f2e13e44cffc9696268e00602405))
+
+
 ## [0.5.0](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.4.0..v0.5.0) - 2025-10-10
 
 ### ⛰️  Features
