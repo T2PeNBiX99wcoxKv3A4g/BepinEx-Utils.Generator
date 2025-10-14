@@ -25,30 +25,19 @@ public class BepInUtilsGenerator : IIncrementalGenerator
     private static Template? _cacheConfigPropertyTemplate;
     private static Template? _cacheConfigEventTemplate;
 
-    private static Template Template
-    {
-        get => _cacheTemplate ??= Template.Parse(Resources.BepInUtilsTemplate);
-    }
+    private static Template Template => _cacheTemplate ??= Template.Parse(Resources.BepInUtilsTemplate);
 
-    private static Template ConfigFieldTemplate
-    {
-        get => _cacheConfigFieldTemplate ??= Template.Parse(Resources.ConfigFieldTemplate);
-    }
+    private static Template ConfigFieldTemplate =>
+        _cacheConfigFieldTemplate ??= Template.Parse(Resources.ConfigFieldTemplate);
 
-    private static Template ConfigValueTemplate
-    {
-        get => _cacheConfigValueTemplate ??= Template.Parse(Resources.ConfigValueTemplate);
-    }
+    private static Template ConfigValueTemplate =>
+        _cacheConfigValueTemplate ??= Template.Parse(Resources.ConfigValueTemplate);
 
-    private static Template ConfigPropertyTemplate
-    {
-        get => _cacheConfigPropertyTemplate ??= Template.Parse(Resources.ConfigPropertyTemplate);
-    }
+    private static Template ConfigPropertyTemplate =>
+        _cacheConfigPropertyTemplate ??= Template.Parse(Resources.ConfigPropertyTemplate);
 
-    private static Template ConfigEventTemplate
-    {
-        get => _cacheConfigEventTemplate ??= Template.Parse(Resources.ConfigEventTemplate);
-    }
+    private static Template ConfigEventTemplate =>
+        _cacheConfigEventTemplate ??= Template.Parse(Resources.ConfigEventTemplate);
 
 #if DEBUG
     private static readonly List<string> DebugOutput = [];

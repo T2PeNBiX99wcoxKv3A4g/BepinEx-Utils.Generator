@@ -29,30 +29,19 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
     private static Template? _cacheAccessMethodTypeTemplate;
     private static Template? _cacheAccessMethodVoidTemplate;
 
-    private static Template Template
-    {
-        get => _cacheTemplate ??= Template.Parse(Resources.AccessExtensionsTemplate);
-    }
+    private static Template Template => _cacheTemplate ??= Template.Parse(Resources.AccessExtensionsTemplate);
 
-    private static Template AccessFieldTemplate
-    {
-        get => _cacheAccessFieldTemplate ??= Template.Parse(Resources.AccessFieldTemplate);
-    }
+    private static Template AccessFieldTemplate =>
+        _cacheAccessFieldTemplate ??= Template.Parse(Resources.AccessFieldTemplate);
 
-    private static Template AccessPropertyTemplate
-    {
-        get => _cacheAccessPropertyTemplate ??= Template.Parse(Resources.AccessPropertyTemplate);
-    }
+    private static Template AccessPropertyTemplate =>
+        _cacheAccessPropertyTemplate ??= Template.Parse(Resources.AccessPropertyTemplate);
 
-    private static Template AccessMethodTypeTemplate
-    {
-        get => _cacheAccessMethodTypeTemplate ??= Template.Parse(Resources.AccessMethodTypeTemplate);
-    }
+    private static Template AccessMethodTypeTemplate =>
+        _cacheAccessMethodTypeTemplate ??= Template.Parse(Resources.AccessMethodTypeTemplate);
 
-    private static Template AccessMethodVoidTemplate
-    {
-        get => _cacheAccessMethodVoidTemplate ??= Template.Parse(Resources.AccessMethodVoidTemplate);
-    }
+    private static Template AccessMethodVoidTemplate =>
+        _cacheAccessMethodVoidTemplate ??= Template.Parse(Resources.AccessMethodVoidTemplate);
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
