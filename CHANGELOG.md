@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.1..v0.5.2) - 2025-10-14
+
+### 🚜 Refactor
+
+- *(Generator)* Use explicit property getters for template caching and improve argument sanitization formatting - ([38eaee3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/38eaee3c59747c3eb8abb9b0ae8f189b7275cb67))
+
+### Action
+
+- Update `CHANGELOG.md` - ([b33d11d](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/b33d11d1119ab6be9430fd3ab3c9a74d1c80ad90))
+
+
 ## [0.5.1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.0..v0.5.1) - 2025-10-11
 
 ### 🐛 Bug Fixes
