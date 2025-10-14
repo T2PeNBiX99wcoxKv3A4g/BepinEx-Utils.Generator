@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.2..v0.5.3) - 2025-10-14
+
+### 🚜 Refactor
+
+- *(Generator)* Simplify template property declarations with expression-bodied syntax - ([c68213d](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/c68213d6a26a4d8630fdd572943a70e1dd618341))
+
+### Action
+
+- Update `CHANGELOG.md` - ([aead191](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/aead1914201a08646bab2014a1bfd90563da8609))
+
+
 ## [0.5.2](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.1..v0.5.2) - 2025-10-14
 
 ### 🚜 Refactor
