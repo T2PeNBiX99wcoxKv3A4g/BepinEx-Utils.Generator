@@ -28,19 +28,31 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
     private static Template? _cacheAccessPropertyTemplate;
     private static Template? _cacheAccessMethodTypeTemplate;
     private static Template? _cacheAccessMethodVoidTemplate;
-    private static Template Template => _cacheTemplate ??= Template.Parse(Resources.AccessExtensionsTemplate);
 
-    private static Template AccessFieldTemplate =>
-        _cacheAccessFieldTemplate ??= Template.Parse(Resources.AccessFieldTemplate);
+    private static Template Template
+    {
+        get => _cacheTemplate ??= Template.Parse(Resources.AccessExtensionsTemplate);
+    }
 
-    private static Template AccessPropertyTemplate =>
-        _cacheAccessPropertyTemplate ??= Template.Parse(Resources.AccessPropertyTemplate);
+    private static Template AccessFieldTemplate
+    {
+        get => _cacheAccessFieldTemplate ??= Template.Parse(Resources.AccessFieldTemplate);
+    }
 
-    private static Template AccessMethodTypeTemplate =>
-        _cacheAccessMethodTypeTemplate ??= Template.Parse(Resources.AccessMethodTypeTemplate);
+    private static Template AccessPropertyTemplate
+    {
+        get => _cacheAccessPropertyTemplate ??= Template.Parse(Resources.AccessPropertyTemplate);
+    }
 
-    private static Template AccessMethodVoidTemplate =>
-        _cacheAccessMethodVoidTemplate ??= Template.Parse(Resources.AccessMethodVoidTemplate);
+    private static Template AccessMethodTypeTemplate
+    {
+        get => _cacheAccessMethodTypeTemplate ??= Template.Parse(Resources.AccessMethodTypeTemplate);
+    }
+
+    private static Template AccessMethodVoidTemplate
+    {
+        get => _cacheAccessMethodVoidTemplate ??= Template.Parse(Resources.AccessMethodVoidTemplate);
+    }
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -190,7 +202,11 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
                 return null;
             }
 
-            return AccessFieldTemplate.Render(new { TypeName = type2, field.Name }, member => member.Name);
+            return AccessFieldTemplate.Render(new
+            {
+                TypeName = type2,
+                field.Name
+            }, member => member.Name);
         });
 
         // ReSharper disable once InvertIf
@@ -223,7 +239,11 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
                 return null;
             }
 
-            return AccessPropertyTemplate.Render(new { TypeName = type2, property.Name },
+            return AccessPropertyTemplate.Render(new
+                {
+                    TypeName = type2,
+                    property.Name
+                },
                 member => member.Name);
         });
 
@@ -276,7 +296,8 @@ public class AccessExtensionsGenerator : IIncrementalGenerator
                     {
                         argCountList[arg] = argCountList.TryGetValue(arg, out var count) ? count + 1 : 1;
                         return (char.ToLower(arg.GetValueOrDefault(0) ?? 'a') + arg.Substring(1) + argCountList[arg])
-                            .Replace(".", "_").Replace("<", "_").Replace(">", "_").Replace("[", "_").Replace("]", "_");
+                            .Replace(".", "_").Replace("<", "_").Replace(">", "_").Replace("[", "_").Replace("]", "_")
+                            .Replace(",", "_").Replace("(", "_").Replace(")", "_").Replace(" ", "_");
                     })
                     .ToList();
                 var argumentsWithTypesList = argTypes.Zip(argumentNames, (arg, name) => $"{arg} {name}").ToList();
