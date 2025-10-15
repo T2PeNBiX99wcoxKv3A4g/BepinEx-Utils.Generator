@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.4](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.3..v0.5.4) - 2025-10-15
+
+### 🐛 Bug Fixes
+
+- *(Template)* Suppress nullable reference warnings in `AccessMethodTypeTemplate.scriban` and `AccessPropertyTemplate.scriban` - ([7ded589](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/7ded589ea0759bd493fca4af790a260a84530d6a))
+- *(Template)* Suppress nullable reference warning in `AccessFieldTemplate.scriban` getter - ([196d881](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/196d8812bba4f8cfcf159b62373eeb1cc039868d))
+
+### Action
+
+- Update `CHANGELOG.md` - ([be9b4e7](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/be9b4e7a83198e68022472b6a7308dcf61b72b9f))
+
+
 ## [0.5.3](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.2..v0.5.3) - 2025-10-14
 
 ### 🚜 Refactor
