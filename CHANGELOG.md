@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.5](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.4..v0.5.5) - 2025-10-15
+
+### 🚜 Refactor
+
+- *(Template)* Replace `BepInUtilsUnityPlugin` to `IBepInUtils` - ([a68d4da](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/a68d4da37e0023a2721acc67596e8b92a46ebd6a))
+
+### Action
+
+- Update `CHANGELOG.md` - ([b9629c1](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/b9629c18788ff78009aa614578c5b33e35b9419b))
+
+
 ## [0.5.4](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.3..v0.5.4) - 2025-10-15
 
 ### 🐛 Bug Fixes
