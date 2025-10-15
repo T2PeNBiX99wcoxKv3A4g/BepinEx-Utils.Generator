@@ -13,19 +13,19 @@ using Logger = BepInExUtils.Logger;
 namespace {{Namespace}};
 
 [BepInPlugin(Utils.Guid, Utils.Name, Utils.Version)]
-partial class {{ClassName}} : BepInUtilsUnityPlugin
+partial class {{ClassName}} : BaseUnityPlugin, IBepInUtils
 {
     private static {{ClassName}}? _instance;
     private readonly Harmony _harmony = new(Utils.Guid);
-    
-    private void Awake()
+
+    public {{ClassName}}()
     {
         _instance = this;
         {{ConfigValues}}
         Configs.Init();
         Utils.Logger.Info($"Plugin {Utils.Name} is loaded, version {Utils.Version}");
         _harmony.PatchAll(Assembly.GetExecutingAssembly());
-        PostAwake();
+        Init();
     }
 }
 
@@ -42,9 +42,9 @@ static partial class Utils
 public static class Configs
 {
     {{ConfigFields}}
-    
+
     {{ConfigPropertyList}}
-    
+
     internal static void Init()
     {
         {{ConfigEvents}}
