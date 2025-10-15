@@ -6,7 +6,7 @@ private static {{Type}}? _old{{Key}};
 
 public static {{Type}} {{Key}}
 {
-    get => _{{Key}}?.Value ?? default;
+    get => (_{{Key}}?.Value ?? default)!;
     set
     {
         if (_{{Key}} == null) return;
