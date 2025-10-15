@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.6](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.5..v0.5.6) - 2025-10-15
+
+### 🐛 Bug Fixes
+
+- *(Template)* Suppress nullable warnings in `ConfigPropertyTemplate.scriban` and `ConfigEventTemplate.scriban` - ([c897181](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/c8971819d27c6c26cf26429f37d9681c6a0a2fd4))
+
+### Action
+
+- Update `CHANGELOG.md` - ([d01880b](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/d01880b624cf2b52bf60cdc7e07a7b0c08704c18))
+
+
 ## [0.5.5](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.4..v0.5.5) - 2025-10-15
 
 ### 🚜 Refactor
