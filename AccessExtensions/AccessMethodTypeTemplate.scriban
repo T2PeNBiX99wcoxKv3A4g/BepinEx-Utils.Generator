@@ -1,4 +1,4 @@
 public {{TypeName}} {{Name}}({{ArgumentsWithTypes}})
 {
-    return instance.MethodInvoke<{{TypeName}}>(nameof({{Name}}){{Arguments}})!;
+    return instance.MethodInvoke<{{TypeName}}>(nameof({{Name}}){{Arguments}});
 }

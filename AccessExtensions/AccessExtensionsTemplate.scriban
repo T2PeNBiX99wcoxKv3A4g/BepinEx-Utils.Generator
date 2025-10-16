@@ -3,7 +3,6 @@
 using HarmonyLib;
 {{Usings}}
 
-#nullable enable
 namespace {{Namespace}};
 
 static partial class {{ClassName}}
