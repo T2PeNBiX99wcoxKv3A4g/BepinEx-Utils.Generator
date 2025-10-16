@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.7](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.6..v0.5.7) - 2025-10-16
+
+### 🐛 Bug Fixes
+
+- *(Template)* Remove redundant null-forgiving operator in `AccessExtensions` templates - ([f4843b6](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/f4843b65094e8ecfd1945131cd4107a093d0c6bc))
+
+### Action
+
+- Update `CHANGELOG.md` - ([51db7cf](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/51db7cf01a73f41327f2666641864f546a93ba0e))
+
+
 ## [0.5.6](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.5..v0.5.6) - 2025-10-15
 
 ### 🐛 Bug Fixes
