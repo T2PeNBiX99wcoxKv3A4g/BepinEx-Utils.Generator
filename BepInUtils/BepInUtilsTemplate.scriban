@@ -6,7 +6,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInExUtils.Interfaces;
 {{Usings}}
-using Logger = BepInExUtils.Logger;
+using Logger = BepInExUtils.Logging.Logger;
 #pragma warning restore CS0105
 
 #nullable enable
