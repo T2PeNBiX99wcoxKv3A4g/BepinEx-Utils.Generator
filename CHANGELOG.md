@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.8](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.7..v0.5.8) - 2025-10-19
+
+### 🐛 Bug Fixes
+
+- *(Template)* Update Logger alias to use `BepInExUtils.Logging.Logger` - ([9d64165](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/9d641656253f388ea1be2a94e0c86b5648f23b38))
+
+### Action
+
+- Update `CHANGELOG.md` - ([2dc0e42](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/commit/2dc0e4244a599dbb1e3c2613cfa98389bfe95f55))
+
+
 ## [0.5.7](https://github.com/T2PeNBiX99wcoxKv3A4g/BepinEx-Utils.Generator/compare/v0.5.6..v0.5.7) - 2025-10-16
 
 ### 🐛 Bug Fixes
